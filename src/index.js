@@ -1,4 +1,4 @@
-const { Client, Intents, MessageEmbed, CommandInteractionOptionResolver } = require('discord.js');
+const { Client, Intents, MessageEmbed } = require('discord.js');
 const fs = require('fs');
 const _ = require('lodash');
 
@@ -108,7 +108,7 @@ const updatePriceBotDisplay = async () => {
         if (priceBotDisplayErrCount < CONSTANTS.MAX_RETRY_COUNT + 1) {
             await new Promise((resolve) => setTimeout(resolve, CONSTANTS.ERROR_WAIT_MINS * 60 * 1000));
             console.debug("priceBotDisplayErrCount:" + priceBotDisplayErrCount + " max:" + CONSTANTS.MAX_RETRY_COUNT);
-            updatePriceBotDisplay();
+            await updatePriceBotDisplay();
         }
     }
     finally {
@@ -144,7 +144,7 @@ const updateStatsFeedChannel = async () => {
                 console.error("Error fetching metrics from web UI ", error);
                 await new Promise((resolve) => setTimeout(resolve, CONSTANTS.ERROR_WAIT_MINS * 60 * 1000));
                 updatingStatsFeed = false;
-                updateStatsFeedChannel();
+                await updateStatsFeedChannel();
                 return;
             }
 
@@ -157,7 +157,7 @@ const updateStatsFeedChannel = async () => {
             const statsEmbed = new MessageEmbed()
                 .setColor('#0099ff')
                 .setURL('https://discord.js.org/')
-                .setAuthor('Fantohm Dashboard (' + ghostEmoji + ',' + ghostEmoji + ')', 'https://www.fantohm.com/logo.png', 'https://www.fantohm.com/')
+                .setAuthor( { name: 'Fantohm Dashboard (' + ghostEmoji + ',' + ghostEmoji + ')', iconURL: 'https://www.fantohm.com/logo.png', url: 'https://www.fantohm.com/' } )
                 .setDescription('This data is updated every ' + CONSTANTS.DASHBOARD_REFRESH_RATE_MINS + " mins!")
                 .setThumbnail('https://www.fantohm.com/logo.png')
                 .addFields(
@@ -186,7 +186,7 @@ const updateStatsFeedChannel = async () => {
                 )
 
                 .setTimestamp()
-                .setFooter('FHM DAO', 'https://www.fantohm.com/logo.png');
+                .setFooter( { text: 'FHM DAO', iconURL: 'https://www.fantohm.com/logo.png'} );
 
             if (statsMsgId) {
                 const statsEmbedMsg = await statsChannel.messages.fetch(statsMsgId);
@@ -230,9 +230,9 @@ const init = async () => {
         clientReady = true;
 
         console.debug(new Date() + "Client Ready");
-        updatePriceBotDisplay();
+        await updatePriceBotDisplay();
         if (statsChannel) {
-            updateStatsFeedChannel();
+            await updateStatsFeedChannel();
         }
     });
 }
