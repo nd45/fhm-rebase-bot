@@ -182,6 +182,10 @@ const updateStatsFeedChannel = async () => {
                     { name: 'Staked FHM (F)' + moneyBagEmoji, value: fantomMetrics.stakedFHM, inline: true },
                     { name: 'Staked FHM (M)' + moneyBagEmoji, value: moonRiverMetrics.stakedFHM, inline: true },
                     { name: 'Price Chart ', value: '[Click Here](' + CONSTANTS.CHART_URL + ')', inline: true },
+                    { name: 'wsFHM Price (F)', value: fantomMetrics.wsPrice, inline: true },
+                    { name: 'Current Index (F)', value: fantomMetrics.currentIndex, inline: true },
+                    { name: 'wsFHM Price (M)', value: moonRiverMetrics.wsPrice, inline: true },
+                    { name: 'Current Index (M)', value: moonRiverMetrics.currentIndex, inline: true },
                     { name: 'Global Market Cap ', value: fantomMetrics.globalMarketcap, inline: true },
                 )
 
