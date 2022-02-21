@@ -45,8 +45,6 @@ const processDashboardMetrics = (dashboardMetrics) => {
         if (!metrics.currentIndex && x.startsWith("Current Index")) {
             metrics.currentIndex = x.substring(x.indexOf("Current Index") + 13);
         }
-        console.log(metrics.wsPrice)
-        console.log(metrics.currentIndex)
     });
 
     return metrics;
