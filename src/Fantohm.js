@@ -20,7 +20,7 @@ const processDashboardMetrics = (dashboardMetrics) => {
         if (!metrics.price && !x.startsWith("MwsFHM Price") && !x.startsWith("FwsFHM Price") && !x.includes("WebsiteGovernanceDocs") && x.startsWith("FHM Price")) {
             metrics.price = x.substring(x.indexOf("FHM Price") + 9, x.indexOf("Market Cap"));
             //metrics.marketCap = x.substring(x.indexOf("Market Cap") + 10, x.indexOf("Circulating Supply"));
-            metrics.totalCircSupply = x.substring(x.indexOf("Circulating Supply") + 18, x.indexOf("Global APY"));
+            metrics.totalCircSupply = x.substring(x.indexOf("Circulating Supply") + 18, x.indexOf("Global Accelerated APY"));
             //metrics.apy = x.substring(x.indexOf("Global APY") + 10, x.indexOf("Treasury Balance"));
             metrics.marketCap = x.substring(x.indexOf("Treasury Balance") + 16, x.indexOf("Book value"));
         }
@@ -36,17 +36,17 @@ const processDashboardMetrics = (dashboardMetrics) => {
         if (!metrics.globalMarketcap && x.startsWith("Total Value Deposited") && x.length > 21) {
             metrics.globalMarketcap = x.substring(x.indexOf("Total Value Deposited") + 21);
         }
-        if (!metrics.wsPrice && x.startsWith("FwsFHM")) {
-            metrics.wsPrice = x.substring(x.indexOf("FwsFHM Price") + 12);
+        if (!metrics.wsPrice && x.startsWith("fwsFHM")) {
+            metrics.wsPrice = x.substring(x.indexOf("fwsFHM Price") + 12);
         }
-        if (!metrics.wsPrice && x.startsWith("MwsFHM Price")) {
-            metrics.wsPrice = x.substring(x.indexOf("MwsFHM Price") + 12);
+        if (!metrics.wsPrice && x.startsWith("mwsFHM Price")) {
+            metrics.wsPrice = x.substring(x.indexOf("mwsFHM Price") + 12);
         }
         if (!metrics.currentIndex && x.startsWith("Current Index")) {
             metrics.currentIndex = x.substring(x.indexOf("Current Index") + 13);
         }
     });
-
+console.log(metrics)
     return metrics;
 }
 

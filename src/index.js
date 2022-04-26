@@ -165,10 +165,10 @@ const updateStatsFeedChannel = async () => {
                         name: pushPinEmoji + ' Overview', value: 'For more stats visit [Fantohm DAO Dashboard](' + CONSTANTS.FHM_STATS_DASHBOARD_URL + ')'
                             + ' \n\n(F)antom and (M)oonriver stats'
                     },
-                    { name: 'Market Cap(F)', value: fantomMetrics.marketCap, inline: true },
+                    { name: 'Market Cap', value: moonRiverMetrics.globalMarketcap, inline: true },
                     { name: 'Price (F)' + moneyMouthEmoji, value: fantomMetrics.price, inline: true },
                     { name: 'Circulating Supply(F)', value: fantomMetrics.totalCircSupply, inline: true },
-                    { name: 'Market Cap (M)', value: moonRiverMetrics.marketCap, inline: true },
+                    //{ name: 'Market Cap (M)', value: moonRiverMetrics.marketCap, inline: true },
                     { name: 'Price (M)' + moneyMouthEmoji, value: moonRiverMetrics.price, inline: true },
                     { name: 'Circulating Supply(M)', value: moonRiverMetrics.totalCircSupply, inline: true },
                     { name: pushPinEmoji + 'Staking(' + ghostEmoji + ',' + ghostEmoji + ')', value: 'How to stake on FantOHM DAO? easy  ,[Click here to read the official doc](' + CONSTANTS.FHM_STAKING_GUIDE_URL + ')', inline: false },
@@ -192,14 +192,14 @@ const updateStatsFeedChannel = async () => {
                 .setTimestamp()
                 .setFooter( { text: 'FHM DAO', iconURL: 'https://www.fantohm.com/logo.png'} );
 
-            if (statsMsgId) {
-                const statsEmbedMsg = await statsChannel.messages.fetch(statsMsgId);
-                await statsEmbedMsg.edit({ embeds: [statsEmbed] })
-            }
-            else {
+            // if (statsMsgId) {
+            //     const statsEmbedMsg = await statsChannel.messages.fetch(statsMsgId);
+            //     await statsEmbedMsg.edit({ embeds: [statsEmbed] })
+            // }
+            // else {
                 statsMsgId = (await statsChannel.send({ embeds: [statsEmbed] })).id;
                 writeStatsMsgID(statsMsgId);
-            }
+            //}
 
             setTimeout(updateStatsFeedChannel, statsFeedUpdateInterval);
         }
