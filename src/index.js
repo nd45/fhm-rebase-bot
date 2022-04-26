@@ -192,14 +192,14 @@ const updateStatsFeedChannel = async () => {
                 .setTimestamp()
                 .setFooter( { text: 'FHM DAO', iconURL: 'https://www.fantohm.com/logo.png'} );
 
-            // if (statsMsgId) {
-            //     const statsEmbedMsg = await statsChannel.messages.fetch(statsMsgId);
-            //     await statsEmbedMsg.edit({ embeds: [statsEmbed] })
-            // }
-            // else {
+            if (statsMsgId) {
+                const statsEmbedMsg = await statsChannel.messages.fetch(statsMsgId);
+                await statsEmbedMsg.edit({ embeds: [statsEmbed] })
+            }
+            else {
                 statsMsgId = (await statsChannel.send({ embeds: [statsEmbed] })).id;
                 writeStatsMsgID(statsMsgId);
-            //}
+            }
 
             setTimeout(updateStatsFeedChannel, statsFeedUpdateInterval);
         }
