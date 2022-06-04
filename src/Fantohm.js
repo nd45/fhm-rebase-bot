@@ -21,14 +21,14 @@ const processDashboardMetrics = (dashboardMetrics) => {
             metrics.price = x.substring(x.indexOf("FHM Price") + 9, x.indexOf("Market Cap"));
             //metrics.marketCap = x.substring(x.indexOf("Market Cap") + 10, x.indexOf("Circulating Supply"));
             metrics.totalCircSupply = x.substring(x.indexOf("Circulating Supply") + 18, x.indexOf("Global Accelerated APY"));
-            //metrics.apy = x.substring(x.indexOf("Global APY") + 10, x.indexOf("Treasury Balance"));
+            metrics.apy = "238%"//x.substring(x.indexOf("Accelerated 180-Day APY") + 23, x.indexOf("Accelerated 180-Day APY"));
             metrics.marketCap = x.substring(x.indexOf("Treasury Balance") + 16, x.indexOf("Book value"));
         }
-        if (!metrics.fiveDayRate && x.startsWith("5-Day Rate")) {
-            metrics.fiveDayRate = x.substring(x.indexOf("5-Day Rate") + 10);
+        if (!metrics.fiveDayRate && x.startsWith("Accelerated 180-Day ROI")) {
+            metrics.fiveDayRate = x.substring(x.indexOf("Accelerated 180-Day ROI") + 23);
         }
-        if (!metrics.fiveDayRate && x.startsWith("5-Day Rate")) {
-            metrics.fiveDayRate = x.substring(x.indexOf("5-Day Rate") + 10);
+        if (!metrics.fiveDayRate && x.startsWith("Accelerated 180-Day ROI")) {
+            metrics.fiveDayRate = x.substring(x.indexOf("Accelerated 180-Day ROI") + 23);
         }
         if (!metrics.stakedFHM && x.startsWith("Staked FHM") && x.length > 10) {
             metrics.stakedFHM = x.substring(x.indexOf("Staked FHM") + 10);
@@ -99,7 +99,7 @@ const getProtocolMetricsFromWebUI = async () => {
         return Array.from(document.querySelectorAll("h4.MuiTypography-root")).map(x => x.textContent)
     });
 
-    metrics.ftm.apy = valueDeposited[0];
+    //metrics.ftm.apy = valueDeposited[0];
     metrics.ftm.tvl = valueDeposited[1];
 
     //Moonriver stats
@@ -149,7 +149,7 @@ const getProtocolMetricsFromWebUI = async () => {
         return Array.from(document.querySelectorAll("h4.MuiTypography-root")).map(x => x.textContent)
     });
 
-    metrics.moon.apy = valueDeposited[0];
+    //metrics.moon.apy = valueDeposited[0];
     metrics.moon.tvl = valueDeposited[1];
 
     await browser.close();
